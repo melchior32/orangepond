@@ -38,7 +38,7 @@ class Colour extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Colour',
         ];
     }
 }

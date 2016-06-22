@@ -30,7 +30,7 @@ class Plant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'colour_id', 'created'], 'required'],
+            [['name', 'colour_id'], 'required'],
             [['colour_id'], 'integer'],
             [['created'], 'safe'],
             [['name'], 'string', 'max' => 255],
@@ -46,7 +46,7 @@ class Plant extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'colour_id' => 'Colour ID',
+            'colour_id' => 'Colour',
             'created' => 'Created',
         ];
     }
@@ -57,5 +57,17 @@ class Plant extends \yii\db\ActiveRecord
     public function getColour()
     {
         return $this->hasOne(Colour::className(), ['id' => 'colour_id']);
+    }
+
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->created = date("Y-m-d H:i:s");
+            }
+            return true;
+        }
+        return false;
     }
 }
