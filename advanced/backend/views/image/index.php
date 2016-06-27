@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'Images';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="image-index">
 
@@ -25,11 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'file',
+            [
+                'attribute' => 'image',
+                'format' => 'html',
+                'value' => function ($model, $dim) {
+
+                    $dim = $model->width > $model->height ? 'width' : 'height';
+
+                    return Html::img('../../uploads/'. $model->file,
+                        [ $dim => '200px']);
+                },
+            ],
             'title',
             'created',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+
+    ?>
 </div>
