@@ -40,7 +40,7 @@ class Image extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['created'], 'safe'],
             [['file', 'title'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
